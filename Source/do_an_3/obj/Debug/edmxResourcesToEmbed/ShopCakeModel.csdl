@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopCakeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cake">
+    <Key>
+      <PropertyRef Name="idCake" />
+    </Key>
+    <Property Name="idCake" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="cost" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="category_idcategory" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="name_cake" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="category" Relationship="Self.FK__cake__category_i__30F848ED" FromRole="cake" ToRole="category" />
+    <NavigationProperty Name="order_cake" Relationship="Self.FK__order_cak__cake___403A8C7D" FromRole="cake" ToRole="order_cake" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="idCategory" />
+    </Key>
+    <Property Name="idCategory" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name_category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="cakes" Relationship="Self.FK__cake__category_i__30F848ED" FromRole="category" ToRole="cake" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" Nullable="false" />
+    <Property Name="name_customer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customer_order" Relationship="Self.FK__customer___custo__35BCFE0A" FromRole="customer" ToRole="customer_order" />
+  </EntityType>
+  <EntityType Name="customer_order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="customer_idcustomer" Type="Int32" />
+    <Property Name="order_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="customer" Relationship="Self.FK__customer___custo__35BCFE0A" FromRole="customer_order" ToRole="customer" />
+    <NavigationProperty Name="order_cake" Relationship="Self.FK__order_cak__order__3F466844" FromRole="customer_order" ToRole="order_cake" />
+  </EntityType>
+  <EntityType Name="order_cake">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_idorder" Type="Int32" />
+    <Property Name="cake_idCake" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="cake_quantity" Type="Int32" />
+    <NavigationProperty Name="cake" Relationship="Self.FK__order_cak__cake___403A8C7D" FromRole="order_cake" ToRole="cake" />
+    <NavigationProperty Name="customer_order" Relationship="Self.FK__order_cak__order__3F466844" FromRole="order_cake" ToRole="customer_order" />
+  </EntityType>
+  <Association Name="FK__cake__category_i__30F848ED">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="cake" Type="Self.cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="idCategory" />
+      </Principal>
+      <Dependent Role="cake">
+        <PropertyRef Name="category_idcategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_cak__cake___403A8C7D">
+    <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+    <End Role="order_cake" Type="Self.order_cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cake">
+        <PropertyRef Name="idCake" />
+      </Principal>
+      <Dependent Role="order_cake">
+        <PropertyRef Name="cake_idCake" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__customer___custo__35BCFE0A">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="customer_order" Type="Self.customer_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="customer_order">
+        <PropertyRef Name="customer_idcustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_cak__order__3F466844">
+    <End Role="customer_order" Type="Self.customer_order" Multiplicity="0..1" />
+    <End Role="order_cake" Type="Self.order_cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer_order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="order_cake">
+        <PropertyRef Name="order_idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopCakeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cakes" EntityType="Self.cake" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="customer_order" EntityType="Self.customer_order" />
+    <EntitySet Name="order_cake" EntityType="Self.order_cake" />
+    <AssociationSet Name="FK__cake__category_i__30F848ED" Association="Self.FK__cake__category_i__30F848ED">
+      <End Role="category" EntitySet="categories" />
+      <End Role="cake" EntitySet="cakes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_cak__cake___403A8C7D" Association="Self.FK__order_cak__cake___403A8C7D">
+      <End Role="cake" EntitySet="cakes" />
+      <End Role="order_cake" EntitySet="order_cake" />
+    </AssociationSet>
+    <AssociationSet Name="FK__customer___custo__35BCFE0A" Association="Self.FK__customer___custo__35BCFE0A">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="customer_order" EntitySet="customer_order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_cak__order__3F466844" Association="Self.FK__order_cak__order__3F466844">
+      <End Role="customer_order" EntitySet="customer_order" />
+      <End Role="order_cake" EntitySet="order_cake" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

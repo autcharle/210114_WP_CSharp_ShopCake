@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopCakeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cake">
+    <Key>
+      <PropertyRef Name="idCake" />
+    </Key>
+    <Property Name="idCake" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="cost" Type="int" />
+    <Property Name="price" Type="int" />
+    <Property Name="category_idcategory" Type="varchar" MaxLength="5" />
+    <Property Name="image" Type="varbinary(max)" />
+    <Property Name="name_cake" Type="nvarchar" MaxLength="100" />
+    <Property Name="description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="idCategory" />
+    </Key>
+    <Property Name="idCategory" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="name_category" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="int" Nullable="false" />
+    <Property Name="name_customer" Type="nvarchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="customer_order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="customer_idcustomer" Type="int" />
+    <Property Name="order_date" Type="date" />
+  </EntityType>
+  <EntityType Name="order_cake">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_idorder" Type="int" />
+    <Property Name="cake_idCake" Type="varchar" MaxLength="5" />
+    <Property Name="cake_quantity" Type="int" />
+  </EntityType>
+  <Association Name="FK__cake__category_i__30F848ED">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="cake" Type="Self.cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="idCategory" />
+      </Principal>
+      <Dependent Role="cake">
+        <PropertyRef Name="category_idcategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__customer___custo__35BCFE0A">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="customer_order" Type="Self.customer_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="customer_order">
+        <PropertyRef Name="customer_idcustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_cak__cake___403A8C7D">
+    <End Role="cake" Type="Self.cake" Multiplicity="0..1" />
+    <End Role="order_cake" Type="Self.order_cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cake">
+        <PropertyRef Name="idCake" />
+      </Principal>
+      <Dependent Role="order_cake">
+        <PropertyRef Name="cake_idCake" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__order_cak__order__3F466844">
+    <End Role="customer_order" Type="Self.customer_order" Multiplicity="0..1" />
+    <End Role="order_cake" Type="Self.order_cake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer_order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="order_cake">
+        <PropertyRef Name="order_idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopCakeModelStoreContainer">
+    <EntitySet Name="cake" EntityType="Self.cake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer_order" EntityType="Self.customer_order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_cake" EntityType="Self.order_cake" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__cake__category_i__30F848ED" Association="Self.FK__cake__category_i__30F848ED">
+      <End Role="category" EntitySet="category" />
+      <End Role="cake" EntitySet="cake" />
+    </AssociationSet>
+    <AssociationSet Name="FK__customer___custo__35BCFE0A" Association="Self.FK__customer___custo__35BCFE0A">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="customer_order" EntitySet="customer_order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_cak__cake___403A8C7D" Association="Self.FK__order_cak__cake___403A8C7D">
+      <End Role="cake" EntitySet="cake" />
+      <End Role="order_cake" EntitySet="order_cake" />
+    </AssociationSet>
+    <AssociationSet Name="FK__order_cak__order__3F466844" Association="Self.FK__order_cak__order__3F466844">
+      <End Role="customer_order" EntitySet="customer_order" />
+      <End Role="order_cake" EntitySet="order_cake" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

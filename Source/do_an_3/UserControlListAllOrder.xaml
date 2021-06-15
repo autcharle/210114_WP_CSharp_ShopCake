@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="do_an_3.UserControlListAllOrder"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:do_an_3"
+             mc:Ignorable="d" 
+             d:DesignHeight="580" d:DesignWidth="1040">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="DANH SÁCH ĐƠN HÀNG" Grid.ColumnSpan="4" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="32" Foreground="Red" FontWeight="Bold"/>
+
+        <TextBlock Text="TÊN KHÁCH HÀNG" Grid.Row="1"
+                   VerticalAlignment="Center" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" 
+                 VerticalContentAlignment="Center" FontSize="20"
+                 Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+
+        <ListView Name="lvListAllOrder" Grid.Row="2" Grid.ColumnSpan="4">
+            <ListView.Resources>
+                <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="FontSize" Value="14" />
+                </Style>
+            </ListView.Resources>
+
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}" >
+
+                    <GridViewColumn Header="TÊN KHÁCH HÀNG" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding name_customer}" Foreground="Blue" FontSize="16"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="TỔNG ĐƠN HÀNG" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding totalOrderMoney}" Foreground="Blue" FontSize="16"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="NGÀY TẠO ĐƠN" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding order_date}" Foreground="Blue" FontSize="16"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="TÌNH TRẠNG" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding status}" Foreground="Blue" FontSize="16"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+
+    </Grid>
+</UserControl>

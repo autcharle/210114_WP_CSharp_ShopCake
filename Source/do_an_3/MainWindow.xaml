@@ -1,0 +1,64 @@
+﻿<Window x:Class="do_an_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:do_an_3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1300" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Name="ShopCake">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Background="Gray" Grid.RowSpan="6">
+            
+            <Button Name="btnOpenMenu" Click="btnOpenMenu_Click" Margin="10,10,0,72"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="40"
+                    BorderBrush="Transparent">
+                <Button.Background>
+                    <ImageBrush ImageSource="images/menu_open.jpg"/>
+                </Button.Background>
+            </Button>
+
+            <Button Name="btnHome" Content="Danh sách sản phẩm" Click="btnHome_Click"
+                    FontSize="20" Margin="0,5,0,72" Height="40">
+            </Button>
+
+            <Button Name="btnAddCake" Content="Thêm sản phẩm" Click="btnAddCake_Click"
+                    FontSize="20" Margin="0,5,0,72" Height="40">
+            </Button>
+
+            <Button Name="btnStatistic" Content="Thống kê doanh số" Click="btnStatistic_Click"
+                    FontSize="20" Margin="0,5,0,72" Height="40">
+            </Button>
+
+            <Button Name="btnAddOrder" Content="Tạo đơn hàng" Click="btnAddOrder_Click"
+                    FontSize="20" Margin="0,5,0,72" Height="40">
+            </Button>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Name="Top" Height="64"
+                    Grid.Column="1" Grid.Row="0">
+            <Image RenderOptions.BitmapScalingMode="HighQuality" Name="TopImg" Width="40" Margin="10,10,0,10" Source="images/cake.png" HorizontalAlignment="Left"/>
+            <Label Name="TopLabel" Content="Shop Cake" FontSize="32" VerticalContentAlignment="Top" HorizontalAlignment="Left" Foreground="#FF484848" Width="200" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <ContentControl Name="Content" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
+    </Grid>
+</Window>

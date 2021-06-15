@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="do_an_3.UserControlStatistic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:local="clr-namespace:do_an_3"
+             mc:Ignorable="d" 
+             d:DesignHeight="580" d:DesignWidth="1040">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="THỐNG KÊ DOANH THU THEO THÁNG" 
+                   Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="20" FontWeight="Bold" Foreground="Red"/>
+
+        <ComboBox Name="cmbChosenYear" SelectionChanged="cmbColors_SelectionChanged"
+                  Height="20" Width="100" Grid.Row="1"
+                  HorizontalAlignment="Right" IsEditable="True"/>
+
+        <Grid Grid.Row="2">
+            <lvc:CartesianChart LegendLocation="Bottom" Name="chartColumn">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Doanh thu theo tháng" 
+                              Labels="{Binding Labels}"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="VNĐ" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+
+        <Button Name="btnListAllOrder" Content="DANH SÁCH ĐƠN HÀNG" 
+                Grid.Column="0" Grid.Row="3" Margin="5,5,5,5" 
+                FontSize="20" FontWeight="Bold" Background="Pink"
+                Click="btnListAllOrder_Click"/>
+
+        <TextBlock Text="THỐNG KÊ DOANH THU THEO LOẠI BÁNH" 
+                   Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="20" FontWeight="Bold" Foreground="Red"/>
+
+        <lvc:PieChart Name="pieChartCategoryCake" Grid.Row="2" Grid.Column="1"
+                      LegendLocation="Bottom" Hoverable="False" DataTooltip="{x:Null}">
+        </lvc:PieChart>
+
+    </Grid>
+</UserControl>

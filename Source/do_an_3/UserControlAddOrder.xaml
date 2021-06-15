@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="do_an_3.UserControlAddOrder"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:do_an_3"
+             mc:Ignorable="d" 
+             d:DesignHeight="580" d:DesignWidth="1040">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="TẠO ĐƠN HÀNG MỚI" Grid.Column="1" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="32" Foreground="Red" FontWeight="Bold"/>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="5,5,5,5">
+            <ListView Name="lvCakeOfOrder">
+                <ListView.Resources>
+                    <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="FontSize" Value="14" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}" >
+
+                        <GridViewColumn Header="SẢN PHẨM" Width="270">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding name_cake}" Foreground="Blue" FontSize="16"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="GIÁ" Width="135">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding price}" Foreground="Blue" FontSize="16"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="SỐ LƯỢNG" Width="135">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding quantity}" Foreground="Blue" FontSize="16"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="TỔNG" Width="147">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding totalPrice}" Foreground="Blue" FontSize="16"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Button Name="btnAddCakeToOrder" Content="MUA BÁNH" Click="btnAddCakeToOrder_Click"
+                Grid.Column="1" Grid.Row="2" Margin="50,20,50,20"
+                FontSize="20" FontWeight="Bold" Background="Pink">
+        </Button>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="TIỀN ĐƠN HÀNG"  FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <Label Grid.Column="1"  FontSize="16" Name="lblAllOrder" 
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                   Content="{Binding Path=listCakeSumPrice, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="PHÍ GIAO HÀNG" FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBox Grid.Column="1" FontSize="16" Name="txtShipFee" Grid.Row="1"
+                     TextChanged="txtShipFee_TextChanged" VerticalContentAlignment="Center"/>
+
+            <TextBlock Text="TỔNG TIỀN" Grid.Row="2" FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <Label Grid.Column="1" Grid.Row="2" FontSize="16" Name="lblAllMoney"
+                   VerticalContentAlignment="Center"/>
+
+            <TextBlock Text="TÊN KHÁCH HÀNG" Grid.Row="4" FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="4" FontSize="16" Name="txtNameCustomer"
+                   VerticalContentAlignment="Center"/>
+
+            <TextBlock Text="SỐ ĐIỆN THOẠI" Grid.Row="5" FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="5" FontSize="16" Name="txtPhoneCustomer"
+                   VerticalContentAlignment="Center"/>
+
+            <TextBlock Text="NGÀY TẠO ĐƠN" Grid.Row="6" FontSize="16" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="6" FontSize="16" Name="txtDay"
+                   VerticalContentAlignment="Center"/>
+        </Grid>
+        <Button Name="btnOrder" Content="TẠO ĐƠN" Click="btnOrder_Click"
+                Grid.Column="2" Grid.Row="3" Margin="50,20,50,20"
+                FontSize="20" FontWeight="Bold" Background="Pink"/>
+    </Grid>
+</UserControl>

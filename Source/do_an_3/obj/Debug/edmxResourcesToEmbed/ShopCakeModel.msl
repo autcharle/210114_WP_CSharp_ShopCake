@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopCakeModelStoreContainer" CdmEntityContainer="ShopCakeEntities">
+    <EntitySetMapping Name="cakes">
+      <EntityTypeMapping TypeName="ShopCakeModel.cake">
+        <MappingFragment StoreEntitySet="cake">
+          <ScalarProperty Name="idCake" ColumnName="idCake" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="category_idcategory" ColumnName="category_idcategory" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="name_cake" ColumnName="name_cake" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="ShopCakeModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="name_category" ColumnName="name_category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="ShopCakeModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="name_customer" ColumnName="name_customer" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer_order">
+      <EntityTypeMapping TypeName="ShopCakeModel.customer_order">
+        <MappingFragment StoreEntitySet="customer_order">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="customer_idcustomer" ColumnName="customer_idcustomer" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_cake">
+      <EntityTypeMapping TypeName="ShopCakeModel.order_cake">
+        <MappingFragment StoreEntitySet="order_cake">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="order_idorder" ColumnName="order_idorder" />
+          <ScalarProperty Name="cake_idCake" ColumnName="cake_idCake" />
+          <ScalarProperty Name="cake_quantity" ColumnName="cake_quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
